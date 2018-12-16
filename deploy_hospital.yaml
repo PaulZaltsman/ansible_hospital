@@ -20,6 +20,8 @@
   roles:
     - { role: telegraf, tags: ["agents, telegraf"] }
     - { role: filebeat, tags: ["agents, filebeat"] }
+  vars:
+    ansible_connection: winrm
   pre_tasks:
     - name: Include vars
       include_vars: "{{ playbook_dir }}/global.yaml"
