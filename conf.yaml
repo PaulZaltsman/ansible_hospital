@@ -1,0 +1,12 @@
+---
+- hosts: localhost
+  remote_user: root
+  roles:
+    - { role: configure , tags: ["configure"] }
+  
+
+
+
+
+
+

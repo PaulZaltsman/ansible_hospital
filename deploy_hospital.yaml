@@ -1,9 +1,4 @@
 ---
-- host: localhost
-  remote_user: root
-  roles:
-    - { role: configure , tags: ["configure"] }
-
 - hosts: logstash
   remote_user: root
   roles:
