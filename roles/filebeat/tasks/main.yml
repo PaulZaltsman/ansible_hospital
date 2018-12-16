@@ -2,35 +2,32 @@
 - name: Copy a single file
   win_copy:
     src: filebeat-6.5.3-windows-x86_64.zip
-    dest: "{{ ELK_win_path }}\\telegraf-1.9.1_windows_amd64.zip"
+    dest: "{{ ELK_win_path }}\\filebeat-6.5.3-windows-x86_64"
 
 - name: create filebeat folder
   win_file:
-    path: "{{ ELK_win_path }}"
+    path: "{{ filebeat_win_path }}"
     state: directory
 
 - name: Enshure {{ ELK_win_path }} exists
-  win_file: path={{ ELK_win_path }} state=directory
+  win_file: path={{ filebeat_win_path }} state=directory
 
 - name: extract filebeat zip
   win_unzip:
-    src: "{{ ELK_win_path }}\\telegraf-1.9.1_windows_amd64.zip"
-    dest: "{{ ELK_win_path }}"
+    src: "{{ ELK_win_path }}\\filebeat-6.5.3-windows-x86_64"
+    dest: "{{ filebeat_win_path }}"
     rm: true
 
-- name: Enshure filebeat-6.5.3-windows-x86_64  exists
-  win_file: path={{ ELK_win_path }}\\filebeat-6.5.3-windows-x86_64 state=directory
-
-- name: configure telegraf agent
+- name: configure filebeat agent
   win_template:
-    src: telegraf.confwin.j2
-    dest: "{{ ELK_win_path }}\\filebeat-6.5.3-windows-x86_64\\tfilebeat.yml"
+    src: filebeat.confwin.j2
+    dest: "{{ filebeat_win_path }}\\filebeat.yml"
     
 - name: uninstall filebeat
-  win_command: powershell.exe -ExecutionPolicy ByPass -File {{ ELK_win_path }}\\filebeat-6.5.3-windows-x86_64\\uninstall-service-filebeat.ps1
+  win_command: powershell.exe -ExecutionPolicy ByPass -File {{ filebeat_win_path }}\\uninstall-service-filebeat.ps1
 
 - name: install filebeat
-  win_command: powershell.exe -ExecutionPolicy ByPass -File {{ ELK_win_path }}\\filebeat-6.5.3-windows-x86_64\\install-service-filebeat.ps1
+  win_command: powershell.exe -ExecutionPolicy ByPass -File {{ filebeat_win_path }}\\install-service-filebeat.ps1
 
 - name: Ensure filebeat service is started
   win_service: name=filebeat start_mode=auto state=started

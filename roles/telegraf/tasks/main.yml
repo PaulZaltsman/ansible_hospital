@@ -43,10 +43,10 @@
 - name: configure telegraf agent
   win_template:
     src: telegraf.confwin.j2
-    dest: "{{ telegraf_win_path }}\\telegraf\\telegraf.conf"
+    dest: "{{ telegraf_win_path }}\\telegraf.conf"
 
 - name: install telegraf service
-  raw: nssm.exe install Telegraf {{ telegraf_win_path }}\\telegraf\\telegraf.exe -config {{ telegraf_win_path }}\\telegraf\\telegraf.conf
+  raw: nssm.exe install Telegraf {{ telegraf_win_path }}\\telegraf.exe -config {{ telegraf_win_path }}\\telegraf.conf
 
 - name: start telegraf service
   win_service: 
