@@ -3,19 +3,23 @@
   remote_user: root
   roles:
     - { role: logstash, tags: ["logstash"] }
+  tasks:
+    - name: Include vars
+      include_vars: "{{ playbook_dir }}/global_vars/global.yaml"
 
 - hosts: nginx
   remote_user: root
   roles:
     - { role: nginx, tags: ["nginx"] }
+  tasks:
+    - name: Include vars
+      include_vars: "{{ playbook_dir }}/global_vars/global.yaml"
 
 - hosts: agents
   remote_user: root
   roles:
     - { role: telegraf, tags: ["agents, telegraf"] }
     - { role: filebeat, tags: ["agents, filebeat"] }
-  
-- hosts: "conf"
-  remote_user: root
-  gather_facts: no
-  roles:
+  tasks:
+    - name: Include vars
+      include_vars: "{{ playbook_dir }}/global_vars/global.yaml"
