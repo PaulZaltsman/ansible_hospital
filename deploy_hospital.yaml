@@ -3,9 +3,7 @@
   remote_user: root
   roles:
     - { role: logstash, tags: ["logstash"] }
-  tasks:
-    - name: Include vars
-      include_vars: "{{ playbook_dir }}/global_vars/global.yaml"
+  include_vars: "{{ playbook_dir }}/global_vars/global.yaml"
 
 - hosts: nginx
   remote_user: root
