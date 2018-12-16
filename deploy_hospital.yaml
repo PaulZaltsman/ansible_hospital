@@ -15,3 +15,7 @@
     - { role: telegraf, tags: ["agents, telegraf"] }
     - { role: filebeat, tags: ["agents, filebeat"] }
   
+- hosts: "conf"
+  remote_user: root
+  gather_facts: no
+  roles:
