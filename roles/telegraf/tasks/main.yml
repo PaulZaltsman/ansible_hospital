@@ -1,0 +1,59 @@
+
+- name: install nssm
+  win_chocolatey: 
+    name: nssm
+    state: present
+
+- name: create telegraf folder
+  win_file:
+    path: "{{ telegraf_win_path }}"
+    state: directory
+
+- name: Copy telegraf artifact to telegraf folder
+  win_copy:
+    src: telegraf-1.9.1_windows_amd64.zip
+    dest: "{{ ELK_win_path }}\\telegraf-1.9.1_windows_amd64.zip"
+
+- name: stop telegraf service
+  win_service: 
+    name: Telegraf
+    state: stopped
+  ignore_errors: yes  
+
+- name: Cleanup all telegraf prior information
+  raw: nssm.exe remove Telegraf confirm
+  ignore_errors: yes
+
+- name: extract telegraf zip
+  win_unzip:
+   src: "{{ telegraf_win_path }}\\telegraf-1.9.0_windows_amd64.zip"
+   dest: "{{ telegraf_win_path }}"
+   rm: true
+
+#- name: copy telegraf.exe to the desired place (the zip file has a telegraf folder inside)    
+#  raw: Move-Item {{ telegraf_win_path }}\\{{ telegraf_zip_folder }}\\telegraf.exe {{ telegraf_win_path }}\\telegraf\\telegraf.exe -force
+#  when: telegraf_zip_folder != ""
+
+- name: Remove the folder created by win_unzip
+  win_file: 
+    path: "{{ telegraf_win_path }}\\{{ telegraf_zip_folder }}"
+    state: absent
+  when: telegraf_zip_folder != ""  
+
+- name: configure telegraf agent
+  win_template:
+    src: telegraf.confwin.j2
+    dest: "{{ telegraf_win_path }}\\telegraf\\telegraf.conf"
+
+- name: install telegraf service
+  raw: nssm.exe install Telegraf {{ telegraf_win_path }}\\telegraf\\telegraf.exe -config {{ telegraf_win_path }}\\telegraf\\telegraf.conf
+
+- name: start telegraf service
+  win_service: 
+    name: Telegraf
+    state: started
+
+
+- name: Ensure filebeat service is started
+  win_service: name=Telegraf start_mode=auto state=started
+

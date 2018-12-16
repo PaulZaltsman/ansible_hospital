@@ -1,0 +1,7 @@
+# Restart service and ensure it is enabled
+- name: restart logstash
+  systemd: name=logstash state=restarted enabled=yes daemon_reload=yes
+  when:
+    - logstash_restart_on_change
+    - logstash_start_service
+  register: logstash_restarted

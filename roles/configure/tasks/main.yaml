@@ -1,0 +1,16 @@
+ - name: Copy git shared key
+   copy:
+   	src: "id_rsa_{{ hospital }}.key"
+    dest: /root/.ssh/id_rsa
+    owner: root
+    group: root
+    force: yes
+    mode: 0600 
+
+ - name: Pull hospital configuration from git
+   git:
+    repo: "{{ repo_path }}/{{ hospital }}.git"
+    dest: "{{ hospital }}"
+    clone: yes
+    force: yes
+    accept_hostkey: yes

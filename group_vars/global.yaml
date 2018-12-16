@@ -1,0 +1,3 @@
+repo_path: "git@github.com:PaulZaltsman"
+ELK_win_path: "c:\\agents"
+telegraf_win_path: "{{ ELK_win_path }}\\telegraf"

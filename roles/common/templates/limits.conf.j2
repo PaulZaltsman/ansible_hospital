@@ -1,0 +1,13 @@
+# Create by ansible
+
+root soft nofile {{soft_nofile}}
+root hard nofile {{hard_nofile}}
+
+elasticsearch soft nofile {{hard_nofile}}
+elasticsearch hard nofile 131070
+elasticsearch - memlock unlimited
+elasticsearch soft nproc 4096
+elasticsearch hard nproc 4096
+
+* soft nofile {{soft_nofile}}
+* hard nofile {{hard_nofile}}

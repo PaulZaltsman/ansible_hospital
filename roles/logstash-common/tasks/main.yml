@@ -1,0 +1,15 @@
+- name: Add logstash repo
+  template: src=elasticsearch-repo.j2 dest=/etc/yum.repos.d/logstash-{{ logstash_major_version }}.repo
+  when: logstash_use_repository
+
+- name: Install Logstash
+  yum: name=logstash-{{ logstash_version }} state=present update_cache=yes
+  notify: restart logstash
+
+- name: copy logstash jvm.options to remote
+  template: src=jvm.options.j2 dest={{ logstash_config_dir }}/jvm.options mode=a+r
+  notify: restart logstash
+
+- name: copy logstash settings file
+  template: src=logstash.yml.j2 dest={{ logstash_config_dir }}/logstash.yml mode=a+r
+  notify: restart logstash

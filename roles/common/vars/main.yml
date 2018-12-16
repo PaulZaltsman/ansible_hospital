@@ -1,0 +1,13 @@
+datadir: /root/data
+repo_dir: /etc/yum.repos.d
+soft_nofile: 50000
+hard_nofile: 65535
+
+kafka_public_hosts: '{{groups["kafka"] | join(":9092,")}}:9092'
+kafka_internal_hosts: '{% set IP_ARR=[] %}{% for host in groups["kafka"] %}{%
+ if hostvars[host]["internal_ip"] is defined %}{{IP_ARR.insert(loop.index,hostvars[host]["internal_ip"])}}{%
+  endif %}{% endfor %}{{IP_ARR|join(":9092,")}}:9092'
+zookeeper_public_hosts: '{{groups["zookeeper"] | join(":2181,")}}:2181'
+zookeeper_internal_hosts: '{% set IP_ARR=[] %}{% for host in groups["zookeeper"] %}{%
+ if hostvars[host]["internal_ip"] is defined %}{{IP_ARR.insert(loop.index,hostvars[host]["internal_ip"])}}{%
+  endif %}{% endfor %}{{IP_ARR|join(":2181,")}}:2181'

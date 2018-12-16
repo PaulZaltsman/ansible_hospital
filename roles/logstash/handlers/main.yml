@@ -1,0 +1,1 @@
+- include: roles/logstash-common/handlers/main.yml

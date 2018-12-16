@@ -1,0 +1,22 @@
+---
+- host: localhost
+  remote_user: root
+  roles:
+    - { role: configure , tags: ["configure"] }
+
+- hosts: logstash
+  remote_user: root
+  roles:
+  - { role: logstash, tags: ["logstash"] }
+
+- hosts: nginx
+  remote_user: root
+  roles:
+  - { role: nginx, tags: ["nginx"] }
+
+- hosts: agents
+  remote_user: root
+  roles:
+  - { role: telegraf, tags: ["agents, telegraf"] }
+  - { role: filebeat, tags: ["agents, filebeat"] }
+  

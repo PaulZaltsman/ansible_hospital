@@ -1,0 +1,23 @@
+
+- name: Install common dependencies
+  yum:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - libselinux-python
+    - python-httplib2
+    - net-tools
+    - openssh
+  
+- name: ensure setup dir exists
+  file: path='{{setupdir}}' state=directory
+
+- name: ensure data dir exists
+  file: path='{{datadir}}' state=directory
+
+- name: Limits conf
+  template: src=limits.conf.j2 dest=/etc/security/limits.conf
+
+- name: Set timezone to UTC
+  command: "timedatectl set-timezone Etc/UTC"
+

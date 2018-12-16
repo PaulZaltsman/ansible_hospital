@@ -1,0 +1,17 @@
+---
+logstash_major_version: "6.x"
+logstash_version: "6.5.1"
+logstash_use_repository: true
+logstash_start_service: true
+logstash_restart_on_change: true
+logstash_config_dir: /etc/logstash
+logstash_pipeline_dir: "{{ logstash_config_dir }}/conf.d"
+
+#if you want to install logstash from a custom url, set logstash_use_repository to false and set
+#logstash_custom_package_url:
+#otherwise, when setting es_use_repository to false it will use logstash_package_url
+logstash_package_url: "https://artifacts.elastic.co/downloads/logstash/logstash-{{ logstash_version }}.rpm"
+dbs_app_mem: 12288 #in megabytes
+bootstrap_servers: "{% for host in groups['kafka'] %}{%
+if (hostvars[groups['kafka'][0]])['internal_ip'] is defined %}{{hostvars[host]['internal_ip']}}{%
+else %}{{host}}{% endif %}:9092{%if not loop.last %},{% endif %}{% endfor %}"

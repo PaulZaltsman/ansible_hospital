@@ -1,0 +1,26 @@
+
+- name: Create/Validate conf.d directory
+  file:
+    path: /etc/logstash/conf.d
+    state: directory
+    mode: 0755
+
+- name: Copy lumberjack certificate 
+  file:
+    src: lumberjack.cert
+    dest: /etc/logstash/
+
+- name: copy pipeline configuration 
+  template:
+    src: "logstash_filebeat.conf.j2"
+    dest: "/etc/logstash/conf.d/logstash_filebeat.conf"
+    mode: 0644
+  register: result
+
+- name: restart logstash
+  service: 
+    name: logstash
+    state: restarted
+  when: result is changed 
+
+

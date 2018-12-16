@@ -1,0 +1,29 @@
+input {
+  beats {
+    port => 5044
+  }
+}
+
+filter {
+#  if [path] =~ "access" {
+    mutate {copy => { "[@metadata][beat]" =>"[metadata][beat]" } }
+#    grok {
+#      match => { "message" => "%{COMBINEDAPACHELOG}" }
+#    }
+#  }
+#  date {
+#    match => [ "timestamp" , "dd/MMM/yyyy:HH:mm:ss Z" ]
+#  }
+}
+
+output {  
+  lumberjack {
+    hosts => "{{ elk_stack_nginx }}"
+    id => "Topic1"
+    port => "8086"
+    codec => "json"
+    ssl_certificate => "/etc/logstash/lumberjack.cert"
+ 
+  }
+#    stdout{}
+}
