@@ -1,3 +1,7 @@
+elk_stack_nginx: some.host
+hospital_name: "{{ hospital }}"
+
+#global folder configuration
 repo_path: "git@github.com:PaulZaltsman"
 ELK_win_path: "c:\\agents"
 telegraf_win_path: "{{ ELK_win_path }}\\telegraf"
