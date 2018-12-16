@@ -31,6 +31,6 @@ printTimeStats()
 
 build_configuration()
 {
-  ansible-playbook conf.yaml -i localhost -e "$HOSPITAL=hospital || exit $?"
+  ansible-playbook conf.yaml -i localhost -e "hospital=$HOSPITAL" || exit $?
 
 }

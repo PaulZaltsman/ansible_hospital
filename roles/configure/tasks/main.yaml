@@ -1,6 +1,6 @@
  - name: Copy git shared key
    copy:
-   	src: "{{ playbook_dir}}/id_rsa_{{ hospital }}.key"
+    src: "{{ playbook_dir}}/id_rsa_{{ hospital }}.key"
     dest: /root/.ssh/id_rsa
     owner: root
     group: root
