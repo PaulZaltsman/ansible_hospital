@@ -2,16 +2,16 @@
 - hosts: logstash
   remote_user: root
   roles:
-  - { role: logstash, tags: ["logstash"] }
+    - { role: logstash, tags: ["logstash"] }
 
 - hosts: nginx
   remote_user: root
   roles:
-  - { role: nginx, tags: ["nginx"] }
+    - { role: nginx, tags: ["nginx"] }
 
 - hosts: agents
   remote_user: root
   roles:
-  - { role: telegraf, tags: ["agents, telegraf"] }
-  - { role: filebeat, tags: ["agents, filebeat"] }
+    - { role: telegraf, tags: ["agents, telegraf"] }
+    - { role: filebeat, tags: ["agents, filebeat"] }
   
