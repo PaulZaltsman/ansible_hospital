@@ -31,7 +31,7 @@ printTimeStats()
 
 usage="Usage: $(basename "$0") -h [hospital-name]"
 
-while getopts ":h" opt; do
+while getopts "h:" opt; do
   case $opt in
     h)
       HOSPITAL=$OPTARG
