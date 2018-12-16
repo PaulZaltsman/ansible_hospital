@@ -3,6 +3,9 @@
   remote_user: root
   roles:
     - { role: configure , tags: ["configure"] }
+  pre_tasks:
+    - name: Include vars
+      include_vars: "{{ playbook_dir }}/global.yaml"
   
 
 
