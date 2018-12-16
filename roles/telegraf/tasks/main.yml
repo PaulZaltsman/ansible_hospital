@@ -6,13 +6,13 @@
 
 - name: create telegraf folder
   win_file:
-    path: "{{ telegraf_win_path }}"
+    path: "{{ ELK_win_path }}"
     state: directory
 
 - name: Copy telegraf artifact to telegraf folder
   win_copy:
-    src: telegraf-1.9.1_windows_amd64.zip
-    dest: "{{ ELK_win_path }}\\telegraf-1.9.1_windows_amd64.zip"
+    src: telegraf-1.9.0_windows_amd64.zip
+    dest: "{{ ELK_win_path }}\\telegraf-1.9.0_windows_amd64.zip"
 
 - name: stop telegraf service
   win_service: 
@@ -26,7 +26,7 @@
 
 - name: extract telegraf zip
   win_unzip:
-   src: "{{ telegraf_win_path }}\\telegraf-1.9.0_windows_amd64.zip"
+   src: "{{ ELK_win_path }}\\telegraf-1.9.0_windows_amd64.zip"
    dest: "{{ telegraf_win_path }}"
    rm: true
 
@@ -34,11 +34,11 @@
 #  raw: Move-Item {{ telegraf_win_path }}\\{{ telegraf_zip_folder }}\\telegraf.exe {{ telegraf_win_path }}\\telegraf\\telegraf.exe -force
 #  when: telegraf_zip_folder != ""
 
-- name: Remove the folder created by win_unzip
-  win_file: 
-    path: "{{ telegraf_win_path }}\\{{ telegraf_zip_folder }}"
-    state: absent
-  when: telegraf_zip_folder != ""  
+#- name: Remove the folder created by win_unzip
+#  win_file: 
+#    path: "{{ telegraf_win_path }}\\{{ telegraf_zip_folder }}"
+#    state: absent
+#  when: telegraf_zip_folder != ""  
 
 - name: configure telegraf agent
   win_template:
