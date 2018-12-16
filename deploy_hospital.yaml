@@ -5,7 +5,7 @@
     - { role: logstash, tags: ["logstash"] }
   pre_tasks:
     - name: Include vars
-      include_vars: "{{ playbook_dir }}/global_vars/global.yaml"
+      include_vars: "{{ playbook_dir }}/global.yaml"
 
 - hosts: nginx
   remote_user: root
@@ -13,7 +13,7 @@
     - { role: nginx, tags: ["nginx"] }
   pre_tasks:
     - name: Include vars
-      include_vars: "{{ playbook_dir }}/global_vars/global.yaml"
+      include_vars: "{{ playbook_dir }}/global.yaml"
 
 - hosts: agents
   remote_user: root
@@ -22,4 +22,4 @@
     - { role: filebeat, tags: ["agents, filebeat"] }
   pre_tasks:
     - name: Include vars
-      include_vars: "{{ playbook_dir }}/global_vars/global.yaml"
+      include_vars: "{{ playbook_dir }}/global.yaml"
