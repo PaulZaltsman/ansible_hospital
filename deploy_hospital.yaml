@@ -3,17 +3,15 @@
   remote_user: root
   roles:
     - { role: logstash, tags: ["logstash"] }
-  pre_tasks:
-    - name: Include vars
-      include_vars: "{{ playbook_dir }}/global.yaml"
+  vars_files:
+    -"{{ playbook_dir }}/global.yaml"
 
 - hosts: nginx
   remote_user: root
   roles:
     - { role: nginx, tags: ["nginx"] }
-  pre_tasks:
-    - name: Include vars
-      include_vars: "{{ playbook_dir }}/global.yaml"
+  vars_files:
+    -"{{ playbook_dir }}/global.yaml"
 
 - hosts: agents
   remote_user: root
@@ -27,13 +25,3 @@
   vars_files:
     -"{{ playbook_dir }}/global.yaml"
     -"{{ playbook_dir }}/hospital/vars.yaml"
-  pre_tasks:
-    - name: debug
-      debug:
-        msg: "{{ vars }}"
-    - name: another debug
-      debug: 
-        msg: "{{ ansible_connection }}"
-    - name: another debug
-      debug: 
-        msg: "{{ ansible_pass }}"

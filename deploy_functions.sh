@@ -6,7 +6,8 @@ setup_install_epel()
 
 setup_install_base_utils()
 {
-  yum install -y unzip sshpass ansible
+  yum install -y unzip sshpass ansible python2-pip
+  pip install "pywinrm>=0.3.0"
 }
 
 getTimestamp() {
@@ -17,7 +18,7 @@ printTimeStats()
 {
     echo
     echo "----Time statistics for $HOSPITAL ----"
-    echo
+    echoWa
     echo "Started at : $(date -d @$DEPLOYMENT_START +%T)"
     echo
     echo "Ended at   : $(date -d @$DEPLOYMENT_END +%T)"
