@@ -145,7 +145,7 @@ setup.kibana:
 #----------------------------- Logstash output --------------------------------
 output.logstash:
   # The Logstash hosts
-  hosts: ["{{ groups['logstash'][0] }}:444"]
+  hosts: ["{{ groups['logstash'][0] }}:5044"]
 
   # Optional SSL. By default is off.
   # List of root certificates for HTTPS server verifications
