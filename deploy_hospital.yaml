@@ -4,14 +4,14 @@
   roles:
     - { role: logstash, tags: ["logstash"] }
   vars_files:
-    -"{{ playbook_dir }}/global.yaml"
+    - "{{ playbook_dir }}/global.yaml"
 
 - hosts: nginx
   remote_user: root
   roles:
     - { role: nginx, tags: ["nginx"] }
   vars_files:
-    -"{{ playbook_dir }}/global.yaml"
+    - "{{ playbook_dir }}/global.yaml"
 
 - hosts: agents
   remote_user: root
