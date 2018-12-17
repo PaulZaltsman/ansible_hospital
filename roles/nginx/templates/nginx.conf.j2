@@ -62,7 +62,7 @@ http {
 stream {
     upstream nginx_servers {
         least_conn;
-        server "{{ elk_stack_nginx }}:443";
+        server "{{ external_nginx }}:443";
     }
 
     server {

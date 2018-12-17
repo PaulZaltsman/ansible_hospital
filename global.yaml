@@ -7,3 +7,4 @@ win_path: "c:\\agents"
 telegraf_win_path: "{{ win_path }}\\telegraf"
 telegraf_database: telegraf
 filebeat_win_path: "{{ win_path }}\\filebeat-6.5.3-windows-x86_64"
+external_nginx: "10.142.0.7"

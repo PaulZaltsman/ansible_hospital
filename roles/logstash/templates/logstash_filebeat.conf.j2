@@ -18,9 +18,9 @@ filter {
 
 output {  
   lumberjack {
-    hosts => "{{ elk_stack_nginx }}"
+    hosts => "{{ external_nginx }}"
     id => "Topic1"
-    port => "8086"
+    port => "444"
     codec => "json"
     ssl_certificate => "/etc/logstash/lumberjack.cert"
  
