@@ -1,13 +1,13 @@
 
 - name: create telegraf folder
   win_file:
-    path: "{{ ELK_win_path }}"
+    path: "{{ win_path }}"
     state: directory
 
 - name: Copy telegraf artifact to telegraf folder
   win_copy:
     src: telegraf-1.9.0_windows_amd64.zip
-    dest: "{{ ELK_win_path }}\\telegraf-1.9.0_windows_amd64.zip"
+    dest: "{{ win_path }}\\telegraf-1.9.0_windows_amd64.zip"
 
 - name: stop telegraf service
   win_service: 
@@ -17,8 +17,8 @@
 
 - name: extract telegraf zip
   win_unzip:
-   src: "{{ ELK_win_path }}\\telegraf-1.9.0_windows_amd64.zip"
-   dest: "{{ telegraf_win_path }}"
+   src: "{{ win_path }}\\telegraf-1.9.0_windows_amd64.zip"
+   dest: "{{ win_path }}"
    rm: true
 
 - name: configure telegraf agent

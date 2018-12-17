@@ -3,7 +3,7 @@ hospital_name: "{{ hospital }}"
 
 #global folder configuration
 repo_path: "git@github.com:PaulZaltsman"
-ELK_win_path: "c:\\agents"
-telegraf_win_path: "{{ ELK_win_path }}\\telegraf"
+win_path: "c:\\agents"
+telegraf_win_path: "{{ win_path }}\\telegraf"
 telegraf_database: telegraf
-filebeat_win_path: "{{ ELK_win_path }}\\filebeat"
+filebeat_win_path: "{{ win_path }}\\filebeat"
