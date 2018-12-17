@@ -28,7 +28,7 @@ if [ -z "${HOSPITAL}" ]; then
 fi
 
 
-INVENTORY="$HOSPITAL/inventory.inv"
+INVENTORY="hospital/inventory.inv"
 PLAYBOOK="deploy_hospital.yaml"
 setup_install_epel
 setup_install_base_utils
