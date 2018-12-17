@@ -17,8 +17,8 @@
 
 - name: uninstall telegraf service
   win_command: "{{ telegraf_win_path}}\\telegraf.exe --service uninstall "  
-  ignore_erros: yes
-  
+  ignore_errors: yes
+
 - name: extract telegraf zip
   win_unzip:
    src: "{{ win_path }}\\telegraf-1.9.0_windows_amd64.zip"
