@@ -22,9 +22,20 @@
     - { role: filebeat, tags: ["agents, filebeat"] }
   vars:
     ansible_winrm_server_cert_validation: ignore
+    ansible_connection: winrm
+    ansible_password: "{{ ansible_password }}"
+    ansible_user: "{{ansible_user }}"
   pre_tasks:
     - name: Include vars
       include_vars: "{{ playbook_dir }}/global.yaml"
     - name: Include vault
       include_vars: "{{ playbook_dir }}/hospital/vars.yaml"
-      
+    - name: debug
+      debug:
+        msg: "{{ vars }}"
+    - name: another debug
+      debug: 
+        msg: "{{ ansible_connection }}"
+    - name: another debug
+      debug: 
+        msg: "{{ ansible_pass }}"
