@@ -37,7 +37,7 @@ setup_install_base_utils
 build_configuration
 DEPLOYMENT_START=$(getTimestamp)
 
-ansible-playbook $PLAYBOOK -i $INVENTORY -e "hospital=$HOSPITAL"
+ansible-playbook $PLAYBOOK -i $INVENTORY --ask-vault-pass $VAULTPASS -e "hospital=$HOSPITAL"
 
 DEPLOYMENT_END=$(getTimestamp)
 printTimeStats
