@@ -64,7 +64,7 @@ stream {
         least_conn;
         server "{{ elk_stack_nginx }}:443";
     }
- }  
+
     server {
         listen 8086;
         proxy_pass nginx_servers;
