@@ -1,21 +1,18 @@
 
-- name: Copy a single file
+- name: create filebeat folder
+  win_file:
+    path: "{{ win_path }}"
+    state: directory
+
+- name: Copy filebeat zip
   win_copy:
     src: filebeat-6.5.3-windows-x86_64.zip
     dest: "{{ win_path }}\\filebeat-6.5.3-windows-x86_64.zip"
 
-- name: create filebeat folder
-  win_file:
-    path: "{{ filebeat_win_path }}"
-    state: directory
-
-- name: Enshure {{ win_path }} exists
-  win_file: path={{ filebeat_win_path }} state=directory
-
 - name: extract filebeat zip
   win_unzip:
     src: "{{ win_path }}\\filebeat-6.5.3-windows-x86_64.zip"
-    dest: "{{ filebeat_win_path }}"
+    dest: "{{ win_path }}"
     rm: true
 
 - name: configure filebeat agent
