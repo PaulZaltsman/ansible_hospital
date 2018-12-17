@@ -9,6 +9,12 @@
     src: filebeat-6.5.3-windows-x86_64.zip
     dest: "{{ win_path }}\\filebeat-6.5.3-windows-x86_64.zip"
 
+- name: Stop filebeat service 
+  win_service: 
+    name: filebeat
+    state: stop
+  ignore_errors: true
+  
 - name: extract filebeat zip
   win_unzip:
     src: "{{ win_path }}\\filebeat-6.5.3-windows-x86_64.zip"
