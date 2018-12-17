@@ -24,10 +24,10 @@
     dest: "{{ filebeat_win_path }}\\filebeat.yml"
     
 - name: uninstall filebeat
-  win_command: powershell.exe -ExecutionPolicy ByPass -File {{ filebeat_win_path }}\\uninstall-service-filebeat.ps1
+  win_command: "powershell.exe -ExecutionPolicy ByPass -File {{ filebeat_win_path }}\\uninstall-service-filebeat.ps1"
 
 - name: install filebeat
-  win_command: powershell.exe -ExecutionPolicy ByPass -File {{ filebeat_win_path }}\\install-service-filebeat.ps1
+  win_command: "powershell.exe -ExecutionPolicy ByPass -File {{ filebeat_win_path }}\\install-service-filebeat.ps1"
 
 - name: Ensure filebeat service is started
   win_service: name=filebeat start_mode=auto state=started

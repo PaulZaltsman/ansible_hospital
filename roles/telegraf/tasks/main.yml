@@ -38,5 +38,5 @@
     name: Telegraf
     state: started
 
-- name: Ensure filebeat service is started
+- name: Ensure telegraf service is started
   win_service: name=Telegraf start_mode=auto state=started
