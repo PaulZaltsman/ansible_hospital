@@ -2,19 +2,19 @@
 - name: Copy a single file
   win_copy:
     src: filebeat-6.5.3-windows-x86_64.zip
-    dest: "{{ ELK_win_path }}\\filebeat-6.5.3-windows-x86_64"
+    dest: "{{ win_path }}\\filebeat-6.5.3-windows-x86_64"
 
 - name: create filebeat folder
   win_file:
     path: "{{ filebeat_win_path }}"
     state: directory
 
-- name: Enshure {{ ELK_win_path }} exists
+- name: Enshure {{ win_path }} exists
   win_file: path={{ filebeat_win_path }} state=directory
 
 - name: extract filebeat zip
   win_unzip:
-    src: "{{ ELK_win_path }}\\filebeat-6.5.3-windows-x86_64"
+    src: "{{ win_path }}\\filebeat-6.5.3-windows-x86_64"
     dest: "{{ filebeat_win_path }}"
     rm: true
 
