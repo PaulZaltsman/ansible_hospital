@@ -1,6 +1,6 @@
 #!/bin/bash
 source ./deploy_functions.sh
-usage="Usage: $(basename "$0")-h [hospital-name]"
+usage="Usage: $(basename "$0") -h [hospital-name]"
 
 while getopts "h:" opt; do
   case $opt in
