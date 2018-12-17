@@ -18,7 +18,7 @@ printTimeStats()
 {
     echo
     echo "----Time statistics for $HOSPITAL ----"
-    echoWa
+    echo
     echo "Started at : $(date -d @$DEPLOYMENT_START +%T)"
     echo
     echo "Ended at   : $(date -d @$DEPLOYMENT_END +%T)"

@@ -15,7 +15,6 @@
 
 - hosts: agents
   remote_user: root
-  gather_facts: no
   roles:
     - { role: telegraf, tags: ["agents, telegraf"] }
     - { role: filebeat, tags: ["agents, filebeat"] }
