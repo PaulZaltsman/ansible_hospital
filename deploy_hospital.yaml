@@ -24,4 +24,7 @@
     ansible_winrm_server_cert_validation: ignore
   pre_tasks:
     - name: Include vars
-      include_vars: ["{{ playbook_dir }}/global.yaml", "{{ playbook_dir }}/hospital/vars.yaml"]
+      include_vars: "{{ playbook_dir }}/global.yaml"
+    - name: Include vault
+      include_vars: "{{ playbook_dir }}/hospital/vars.yaml"
+      
