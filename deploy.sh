@@ -2,13 +2,10 @@
 source ./deploy_functions.sh
 usage="Usage: $(basename "$0")-h [hospital-name]"
 
-while getopts "h:p:" opt; do
+while getopts "h:" opt; do
   case $opt in
     h)
       HOSPITAL=$OPTARG
-      ;;
-    p)
-      VAULTPASS=$OPTARG
       ;;
     \?)
       echo "Invalid option: -$OPTARG" >&2
@@ -24,8 +21,9 @@ while getopts "h:p:" opt; do
 done
 
 
-if [ -z "${VAULTPASS}" ]; then
-    echo "Must supply vault password (-s)" >&2
+if [ -z "${HOSPITAL}" ]; then
+    echo "Must supply hospital (-h)" >&2
+    echo "$usage" >&2
     exit 1
 fi
 
@@ -37,7 +35,7 @@ setup_install_base_utils
 build_configuration
 DEPLOYMENT_START=$(getTimestamp)
 
-ansible-playbook $PLAYBOOK -i $INVENTORY --ask-vault-pass $VAULTPASS -e "hospital=$HOSPITAL"
+ansible-playbook $PLAYBOOK -i $INVENTORY --ask-vault-pass -e "hospital=$HOSPITAL"
 
 DEPLOYMENT_END=$(getTimestamp)
 printTimeStats
