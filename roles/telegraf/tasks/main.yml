@@ -15,25 +15,11 @@
     state: stopped
   ignore_errors: yes  
 
-- name: Cleanup all telegraf prior information
-  raw: nssm.exe remove Telegraf confirm
-  ignore_errors: yes
-
 - name: extract telegraf zip
   win_unzip:
    src: "{{ ELK_win_path }}\\telegraf-1.9.0_windows_amd64.zip"
    dest: "{{ telegraf_win_path }}"
    rm: true
-
-#- name: copy telegraf.exe to the desired place (the zip file has a telegraf folder inside)    
-#  raw: Move-Item {{ telegraf_win_path }}\\{{ telegraf_zip_folder }}\\telegraf.exe {{ telegraf_win_path }}\\telegraf\\telegraf.exe -force
-#  when: telegraf_zip_folder != ""
-
-#- name: Remove the folder created by win_unzip
-#  win_file: 
-#    path: "{{ telegraf_win_path }}\\{{ telegraf_zip_folder }}"
-#    state: absent
-#  when: telegraf_zip_folder != ""  
 
 - name: configure telegraf agent
   win_template:
