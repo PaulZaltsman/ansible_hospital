@@ -2,7 +2,7 @@
 - name: Copy a single file
   win_copy:
     src: filebeat-6.5.3-windows-x86_64.zip
-    dest: "{{ win_path }}\\filebeat-6.5.3-windows-x86_64"
+    dest: "{{ win_path }}\\filebeat-6.5.3-windows-x86_64.zip"
 
 - name: create filebeat folder
   win_file:
@@ -14,7 +14,7 @@
 
 - name: extract filebeat zip
   win_unzip:
-    src: "{{ win_path }}\\filebeat-6.5.3-windows-x86_64"
+    src: "{{ win_path }}\\filebeat-6.5.3-windows-x86_64.zip"
     dest: "{{ filebeat_win_path }}"
     rm: true
 
