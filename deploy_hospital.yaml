@@ -17,14 +17,13 @@
 
 - hosts: agents
   remote_user: root
+  gather_facts: no
   roles:
     - { role: telegraf, tags: ["agents, telegraf"] }
     - { role: filebeat, tags: ["agents, filebeat"] }
   vars:
     ansible_winrm_server_cert_validation: ignore
     ansible_connection: winrm
-    ansible_password: "{{ ansible_password }}"
-    ansible_user: "{{ansible_user }}"
   pre_tasks:
     - name: Include vars
       include_vars: "{{ playbook_dir }}/global.yaml"
