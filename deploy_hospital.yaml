@@ -24,7 +24,7 @@
   vars:
     ansible_winrm_server_cert_validation: ignore
     ansible_connection: winrm
-  var_files:
+  vars_files:
     -"{{ playbook_dir }}/global.yaml"
     -"{{ playbook_dir }}/hospital/vars.yaml"
   pre_tasks:
