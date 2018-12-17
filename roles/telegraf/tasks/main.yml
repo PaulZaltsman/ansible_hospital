@@ -1,9 +1,4 @@
 
-- name: install nssm
-  win_chocolatey: 
-    name: nssm
-    state: present
-
 - name: create telegraf folder
   win_file:
     path: "{{ ELK_win_path }}"
@@ -46,7 +41,7 @@
     dest: "{{ telegraf_win_path }}\\telegraf.conf"
 
 - name: install telegraf service
-  raw: nssm.exe install Telegraf {{ telegraf_win_path }}\\telegraf.exe -config {{ telegraf_win_path }}\\telegraf.conf
+  raw: "{{ telegraf_win_path}}\\telegraf.exe --service install --config {{ telegraf_win_path}}\\telegraf.conf"
 
 - name: start telegraf service
   win_service: 
@@ -56,3 +51,4 @@
 - name: Ensure filebeat service is started
   win_service: name=Telegraf start_mode=auto state=started
 
+]

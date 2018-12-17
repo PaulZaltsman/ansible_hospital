@@ -8,6 +8,17 @@
     - python-httplib2
     - net-tools
     - openssh
+
+- name: disabled selinux
+  selinux: state=disabled
+  
+- name: get SElinux mode
+  command: /usr/sbin/getenforce
+  register: enforce
+  
+- name: ensure SELinux is turned off
+  command: /usr/sbin/setenforce 0
+  when: enforce.stdout == 'Enforcing'
   
 - name: ensure setup dir exists
   file: path='{{setupdir}}' state=directory
