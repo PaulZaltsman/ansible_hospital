@@ -50,5 +50,3 @@
 
 - name: Ensure filebeat service is started
   win_service: name=Telegraf start_mode=auto state=started
-
-]
