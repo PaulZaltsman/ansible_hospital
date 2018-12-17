@@ -41,7 +41,7 @@
     dest: "{{ telegraf_win_path }}\\telegraf.conf"
 
 - name: install telegraf service
-  raw: "{{ telegraf_win_path}}\\telegraf.exe --service install --config {{ telegraf_win_path}}\\telegraf.conf"
+  win_command: "{{ telegraf_win_path}}\\telegraf.exe --service install --config {{ telegraf_win_path}}\\telegraf.conf"
 
 - name: start telegraf service
   win_service: 
