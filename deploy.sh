@@ -2,10 +2,13 @@
 source ./deploy_functions.sh
 usage="Usage: $(basename "$0")-h [hospital-name]"
 
-while getopts "h:" opt; do
+while getopts "h:p:" opt; do
   case $opt in
     h)
       HOSPITAL=$OPTARG
+      ;;
+    p)
+      VAULTPASS=$OPTARG
       ;;
     \?)
       echo "Invalid option: -$OPTARG" >&2
@@ -19,6 +22,12 @@ while getopts "h:" opt; do
       ;;
   esac
 done
+
+
+if [ -z "${VAULTPASS}" ]; then
+    echo "Must supply vault password (-s)" >&2
+    exit 1
+fi
 
 
 INVENTORY="$HOSPITAL/inventory.inv"

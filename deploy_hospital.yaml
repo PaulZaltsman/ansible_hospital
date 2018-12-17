@@ -16,14 +16,12 @@
       include_vars: "{{ playbook_dir }}/global.yaml"
 
 - hosts: agents
-  remote_user: ormaman88
+  remote_user: root
   roles:
     - { role: telegraf, tags: ["agents, telegraf"] }
     - { role: filebeat, tags: ["agents, filebeat"] }
   vars:
-    ansible_connection: winrm
-    ansible_password: Aa123456
     ansible_winrm_server_cert_validation: ignore
   pre_tasks:
     - name: Include vars
-      include_vars: "{{ playbook_dir }}/global.yaml"
+      include_vars: ["{{ playbook_dir }}/global.yaml", "{{ playbook_dir }}/hospital/vars.yaml"]

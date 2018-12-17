@@ -10,7 +10,7 @@
  - name: Pull hospital configuration from git
    git:
     repo: "{{ repo_path }}/{{ hospital }}.git"
-    dest: "{{ hospital }}"
+    dest: "hospital"
     clone: yes
     force: yes
     accept_hostkey: yes
